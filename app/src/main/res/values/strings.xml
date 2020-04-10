@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">SklepAllegro</string>
+    <string name="overview_fragment">Overview Fragment</string>
+    <string name="detail_fragment">Detail Fragment</string>
 </resources>
