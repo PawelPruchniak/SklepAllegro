@@ -5,29 +5,20 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.ViewModelProviders
+import com.example.sklepallegro.databinding.DetailFragmentBinding
 
-import com.example.sklepallegro.R
-
+/**
+ *This [Fragment] will show the detailed information about a selected allegro offer
+ */
 class DetailFragment : Fragment() {
-
-    companion object {
-        fun newInstance() = DetailFragment()
-    }
-
-    private lateinit var viewModel: DetailViewModel
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.detail_fragment, container, false)
+        @Suppress("UNUSED_VARIABLE")
+        val application = requireNotNull(activity).application
+        val binding = DetailFragmentBinding.inflate(inflater    )
+        binding.setLifecycleOwner(this)
+        return binding.root
     }
-
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProviders.of(this).get(DetailViewModel::class.java)
-        // TODO: Use the ViewModel
-    }
-
 }

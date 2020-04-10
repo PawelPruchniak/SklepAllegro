@@ -1,7 +1,12 @@
 package com.example.sklepallegro.detail
 
+import android.app.Application
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.ViewModel
+import com.example.sklepallegro.network.AllegroProperty
 
-class DetailViewModel : ViewModel() {
-    // TODO: Implement the ViewModel
+/**
+ * The [ViewModel] that is associated with the [DetailFragment].
+ */
+class DetailViewModel(@Suppress("UNUSED_PARAMETER")allegroProperty: AllegroProperty, app: Application) : AndroidViewModel(app) {
 }
