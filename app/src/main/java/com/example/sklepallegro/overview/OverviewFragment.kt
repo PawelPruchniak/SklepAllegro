@@ -4,7 +4,6 @@ import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
-
 import com.example.sklepallegro.R
 import com.example.sklepallegro.databinding.OverviewFragmentBinding
 

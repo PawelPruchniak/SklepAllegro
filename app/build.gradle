@@ -8,6 +8,10 @@ android {
     dataBinding {
         enabled = true
     }
+    compileOptions {
+        targetCompatibility = "8"
+        sourceCompatibility = "8"
+    }
     defaultConfig {
         applicationId "com.example.sklepallegro"
         minSdkVersion 23
@@ -53,4 +57,12 @@ dependencies {
     // Navigation
     implementation 'androidx.navigation:navigation-fragment-ktx:2.2.1'
     implementation 'androidx.navigation:navigation-ui-ktx:2.2.1'
+
+    // Retrofit
+    implementation "com.squareup.retrofit2:retrofit: 2.8.1"
+    implementation "com.squareup.retrofit2:converter-moshi:2.8.1"
+
+    // Moshi
+    implementation "com.squareup.moshi:moshi:1.9.2"
+    implementation "com.squareup.moshi:moshi-kotlin:1.9.2"
 }
