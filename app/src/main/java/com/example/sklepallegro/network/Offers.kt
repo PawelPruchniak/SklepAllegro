@@ -1,5 +1,5 @@
 package com.example.sklepallegro.network
 
-data class Offers (
-    val offers: List<Offer> = listOf<Offer>()
+data class Offers(
+    var offers: List<Offer> = listOf<Offer>()
 )

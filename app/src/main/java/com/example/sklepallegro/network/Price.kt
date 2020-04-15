@@ -1,6 +1,10 @@
 package com.example.sklepallegro.network
 
-data class Price (
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
+
+@Parcelize
+data class Price(
     val amount: Double,
     val currency: String
-)
+) : Parcelable

@@ -2,4 +2,6 @@
     <string name="app_name">Sklep Allegro</string>
     <string name="overview_fragment">Overview Fragment</string>
     <string name="detail_fragment">Detail Fragment</string>
+    <string name="txt_name_test">Lego CREATOR klocki Sklep i kawiarenka, wielka kawiarenka</string>
+    <string name="txt_price_test">CENA: 255.00 PLN</string>
 </resources>

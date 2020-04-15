@@ -9,14 +9,24 @@
         android:id="@+id/overviewFragment"
         android:name="com.example.sklepallegro.overview.OverviewFragment"
         android:label="overview_fragment"
-        tools:layout="@layout/overview_fragment" >
+        tools:layout="@layout/overview_fragment">
         <action
             android:id="@+id/action_overviewFragment_to_detailFragment"
-            app:destination="@id/detailFragment" />
+            app:destination="@id/detailFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
     <fragment
         android:id="@+id/detailFragment"
         android:name="com.example.sklepallegro.detail.DetailFragment"
         android:label="detail_fragment"
-        tools:layout="@layout/detail_fragment" />
+        tools:layout="@layout/detail_fragment">
+
+            <argument
+                android:name="selectedOffer"
+                app:argType="com.example.sklepallegro.network.Offer"
+            />
+    </fragment>
 </navigation>

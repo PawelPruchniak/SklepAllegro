@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import com.example.sklepallegro.network.AllegroApi
 import com.example.sklepallegro.network.Offer
 import com.example.sklepallegro.network.Offers
+import com.example.sklepallegro.network.Price
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -14,17 +15,29 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
+enum class AllegroApiStatus { LOADING, ERROR, DONE}
+
 /**
  * The [ViewModel] that is attached to the [OverviewFragment].
  */
 class OverviewViewModel : ViewModel() {
 
     // The internal MutableLiveData String that stores the status of the most recent request
-    private val _response = MutableLiveData<String>()
+    private val _status = MutableLiveData<AllegroApiStatus>()
 
     // The external immutable LiveData for the request status String
-    val response: LiveData<String>
-        get() = _response
+    val status: LiveData<AllegroApiStatus>
+        get() = _status
+
+    private val _offers = MutableLiveData<List<Offer>>()
+
+    val offers: LiveData<List<Offer>>
+        get() = _offers
+
+    private val _navigatetoSelectedOffer = MutableLiveData<Offer>()
+
+    val navigatetoSelectedOffer: LiveData<Offer>
+        get() = _navigatetoSelectedOffer
 
     private var viewModelJob = Job()
     private val coroutineScope = CoroutineScope(viewModelJob + Dispatchers.Main)
@@ -42,12 +55,20 @@ class OverviewViewModel : ViewModel() {
     private fun getAllegroOffers() {
 
         coroutineScope.launch {
-            var getPropertiesDeferred = AllegroApi.retrofitService.getOffers()
+            val getPropertiesDeferred = AllegroApi.retrofitService.getOffers()
             try {
-                var listResult = getPropertiesDeferred.await()
-                _response.value = "Success: Got ${listResult.offers.size} Allegro offers"
+                _status.value = AllegroApiStatus.LOADING
+                val listResult = getPropertiesDeferred.await()
+
+                // Sorting and filtering offers by price.amount
+                _offers.value =
+                    listResult.offers.filter{ it.price.amount in 50.0..1000.0 }
+                        .sortedBy { it.price.amount }
+
+                _status.value = AllegroApiStatus.DONE
             } catch (t:Throwable){
-                _response.value = "Failure: " +  t.message
+                _status.value = AllegroApiStatus.ERROR
+                _offers.value = ArrayList()
             }
         }
     }
@@ -55,5 +76,13 @@ class OverviewViewModel : ViewModel() {
     override fun onCleared() {
         super.onCleared()
         viewModelJob.cancel()
+    }
+
+    fun displayOfferDetails(offer: Offer) {
+        _navigatetoSelectedOffer.value = offer
+    }
+
+    fun displayOfferDetailsComplete() {
+        _navigatetoSelectedOffer.value = null
     }
 }
